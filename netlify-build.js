@@ -4,9 +4,15 @@ import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+// Ensure dist/client exists
+const clientDir = path.join(__dirname, 'dist/client');
+if (!fs.existsSync(clientDir)) {
+  fs.mkdirSync(clientDir, { recursive: true });
+}
+
 // Copy public/index.html to dist/client/index.html
 const sourceHtml = path.join(__dirname, 'public/index.html');
-const targetHtml = path.join(__dirname, 'dist/client/index.html');
+const targetHtml = path.join(clientDir, 'index.html');
 
 if (fs.existsSync(sourceHtml)) {
   const html = fs.readFileSync(sourceHtml, 'utf-8');
@@ -16,6 +22,6 @@ if (fs.existsSync(sourceHtml)) {
 
 // Create _redirects for SPA routing
 const redirectsContent = `/*  /index.html  200`;
-const redirectsPath = path.join(__dirname, 'dist/client/_redirects');
+const redirectsPath = path.join(clientDir, '_redirects');
 fs.writeFileSync(redirectsPath, redirectsContent);
 console.log('✓ Generated _redirects for SPA routing');
