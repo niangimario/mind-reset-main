@@ -1,5 +1,5 @@
 [build]
-  command = "npm run build && echo 'Build complete'"
+  command = "npm run build && node netlify-build.js"
   publish = "dist/client"
 
 [dev]
