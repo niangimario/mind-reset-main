@@ -1,7 +1,6 @@
 [build]
-  command = "npm run build"
-  publish = "dist"
-  functions = "netlify/functions"
+  command = "npm run build && echo 'Build complete'"
+  publish = "dist/client"
 
 [dev]
   command = "npm run dev"
@@ -14,8 +13,8 @@
 
 [context.production]
   command = "npm run build"
-  publish = "dist"
+  publish = "dist/client"
 
 [context.deploy-preview]
   command = "npm run build"
-  publish = "dist"
+  publish = "dist/client"
